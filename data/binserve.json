@@ -1,0 +1,12 @@
+{
+    "routes": {
+        "/": "./"
+    },
+    "server": {
+        "host": "0.0.0.0:80"
+    },
+    "static": {
+        "directory": ".",
+        "served_from": "/"
+    }
+}
