@@ -29,7 +29,7 @@ export default function Index() {
   const pokemon = data.pokemon;
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
-      <h1>Pokemon</h1>
+      <h1>🥞 Remix</h1>
       <div className="flex flex-col">
         {pokemon.map((p: any) => (
           <div key={p.id} className="flex flex-row gap-2">
