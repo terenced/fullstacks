@@ -1,28 +1,24 @@
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const Pokemon = ({ pokemon }: { pokemon: Record<string, string> }) => {
-    return (
-        <>
-            {Object.keys(pokemon).map((k) => (
-                <div key={[pokemon.id, k].join(',')}>
-                    {pokemon[k].toString()}
-                </div>
-            ))}
-        </>
-    );
-};
+export interface Pokemon {
+    id: number;
+    name: string;
+    hp: number;
+    attack: number;
+    defense: number;
+    specialAttack: number;
+    specialDefense: number;
+    speed: number;
+}
 
 export async function getServerSideProps() {
-    const pokemonReq = await fetch(
-        `${process.env.POKEMON_API_URL}/pokemon-1500.json`,
-        {
-            cache: 'no-cache',
-        }
-    );
-    const pokemon = await pokemonReq.json();
+    const pokemonReq = await fetch(`http://localhost:8080/pokemon-1500.json`, {
+        cache: 'no-cache',
+    });
+    const pokemon = (await pokemonReq.json()) as Pokemon[];
+
     return {
         props: {
             pokemon,
@@ -30,21 +26,37 @@ export async function getServerSideProps() {
     };
 }
 
-export default function Home({
-    pokemon,
-}: {
-    pokemon: Record<string, string>[];
-}) {
+export function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
     return (
-        <main
-            className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-        >
-            <h1>🥞 Next.js - Pages</h1>
-            <div className="flex flex-col">
-                {pokemon.map((p: any) => (
-                    <div key={p.id} className="flex flex-row gap-2">
-                        <Pokemon pokemon={p} />
-                    </div>
+        <>
+            <div>{pokemon.id}</div>
+            <div className="font-bold">{pokemon.name}</div>
+            <div>{pokemon.hp}</div>
+            <div>{pokemon.attack}</div>
+            <div>{pokemon.defense}</div>
+            <div>{pokemon.specialAttack}</div>
+            <div>{pokemon.specialDefense}</div>
+            <div>{pokemon.speed}</div>
+        </>
+    );
+}
+
+export default function Home({ pokemon }: { pokemon: Pokemon[] }) {
+    return (
+        <main className={`min-h-screen  p-5 ${inter.className}`}>
+            <h1 className="text-3xl font-bold">🥞 Next.js - Pages</h1>
+            <div className="grid grid-cols-8 mt-3" id="table">
+                <div className="font-bold">ID</div>
+
+                <div className="font-bold">Name</div>
+                <div className="font-bold">HP</div>
+                <div className="font-bold">Attack</div>
+                <div className="font-bold">Defense</div>
+                <div className="font-bold">Sp. Attack</div>
+                <div className="font-bold">Sp. Defense</div>
+                <div className="font-bold">Speed</div>
+                {pokemon.map((p) => (
+                    <PokemonRow key={p.id} pokemon={p} />
                 ))}
             </div>
         </main>
