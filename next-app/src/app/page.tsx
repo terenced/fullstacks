@@ -9,7 +9,7 @@ export interface Pokemon {
     speed: number;
 }
 
-export function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
+function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
     return (
         <>
             <div>{pokemon.id}</div>
