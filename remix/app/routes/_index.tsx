@@ -18,7 +18,7 @@ export interface Pokemon {
 }
 
 export const loader = async () => {
-  const pokemonReq = await fetch(`http://localhost:8080/pokemon-1500.json`, {
+  const pokemonReq = await fetch(`${process.env.POKEMON_DATA_URL}/pokemon-1500.json`, {
     cache: "no-cache",
   });
   const pokemon = (await pokemonReq.json()) as Pokemon[];
