@@ -1,12 +1,11 @@
-# TODO
+# TODOs
 
--   [ ] Use DB instead of JSON endpoint (turso or planetscale)
 -   [ ] Deploy (fly or railway)
+-   [ ] Laravel
 -   [ ] SvelteKit
+-   [ ] Django
 -   [ ] SolidStart
 -   [ ] Astro SSR
--   [ ] Laravel
--   [ ] Django
 -   [ ] Rails
--   [ ] htmlx
+-   [ ] Use DB instead of JSON endpoint (turso or planetscale)
 -   [ ] What other frameworks?
