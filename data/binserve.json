@@ -1,6 +1,7 @@
 {
     "routes": {
-        "/": "./"
+        "/": "./",
+        "/health": "./health.html"
     },
     "server": {
         "host": "0.0.0.0:80"
@@ -8,5 +9,8 @@
     "static": {
         "directory": ".",
         "served_from": "/"
+    },
+    "insert_headers": {
+        "x-superbeta": "coffee and love"
     }
 }
