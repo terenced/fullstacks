@@ -8,15 +8,18 @@ export interface Pokemon {
     hp: number;
     attack: number;
     defense: number;
-    specialAttack: number;
-    specialDefense: number;
+    special_attack: number;
+    special_defense: number;
     speed: number;
 }
 
 export async function getServerSideProps() {
-    const pokemonReq = await fetch(`${process.env.POKEMON_DATA_URL}/pokemon-1500.json`, {
-        cache: 'no-cache',
-    });
+    const pokemonReq = await fetch(
+        `${process.env.POKEMON_DATA_URL}/pokemon-1500.json`,
+        {
+            cache: 'no-cache',
+        }
+    );
     const pokemon = (await pokemonReq.json()) as Pokemon[];
 
     return {
@@ -34,8 +37,8 @@ export function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
             <div>{pokemon.hp}</div>
             <div>{pokemon.attack}</div>
             <div>{pokemon.defense}</div>
-            <div>{pokemon.specialAttack}</div>
-            <div>{pokemon.specialDefense}</div>
+            <div>{pokemon.special_attack}</div>
+            <div>{pokemon.special_defense}</div>
             <div>{pokemon.speed}</div>
         </>
     );

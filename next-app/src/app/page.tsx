@@ -4,8 +4,8 @@ export interface Pokemon {
     hp: number;
     attack: number;
     defense: number;
-    specialAttack: number;
-    specialDefense: number;
+    special_attack: number;
+    special_defense: number;
     speed: number;
 }
 
@@ -17,8 +17,8 @@ function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
             <div>{pokemon.hp}</div>
             <div>{pokemon.attack}</div>
             <div>{pokemon.defense}</div>
-            <div>{pokemon.specialAttack}</div>
-            <div>{pokemon.specialDefense}</div>
+            <div>{pokemon.special_attack}</div>
+            <div>{pokemon.special_defense}</div>
             <div>{pokemon.speed}</div>
         </>
     );
