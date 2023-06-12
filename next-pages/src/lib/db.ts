@@ -1,15 +1,11 @@
 import { InferModel } from 'drizzle-orm';
-import { int, mysqlTable, varchar } from 'drizzle-orm/mysql-core';
-import { drizzle } from 'drizzle-orm/mysql2';
-import mysql from 'mysql2';
+import { int, text, sqliteTable } from 'drizzle-orm/sqlite-core';
+import { drizzle } from 'drizzle-orm/libsql';
+import { createClient } from '@libsql/client';
 
-if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set');
-}
-
-export const pokemonTable = mysqlTable('pokemon', {
+export const pokemonTable = sqliteTable('pokemon', {
     id: int('id').primaryKey().notNull(),
-    name: varchar('name', { length: 255 }),
+    name: text('name', { length: 255 }),
     hp: int('hp'),
     attack: int('attack'),
     defense: int('defense'),
@@ -20,6 +16,13 @@ export const pokemonTable = mysqlTable('pokemon', {
 
 export type Pokemon = InferModel<typeof pokemonTable>;
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const client = createClient({
+    url: process.env.TURSO_URL || '',
+    authToken: process.env.TURSO_AUTH_TOKEN,
+});
 
-export const db = drizzle(connection);
+export const db = drizzle(client);
+
+export async function getAllPokemon(): Promise<Pokemon[]> {
+    return await db.select().from(pokemonTable).all();
+}

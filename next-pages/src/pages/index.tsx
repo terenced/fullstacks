@@ -1,26 +1,10 @@
+import { getAllPokemon, Pokemon } from '@/lib/db';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export interface Pokemon {
-    id: number;
-    name: string;
-    hp: number;
-    attack: number;
-    defense: number;
-    special_attack: number;
-    special_defense: number;
-    speed: number;
-}
-
 export async function getServerSideProps() {
-    const pokemonReq = await fetch(
-        `${process.env.POKEMON_DATA_URL}/pokemon-1500.json`,
-        {
-            cache: 'no-cache',
-        }
-    );
-    const pokemon = (await pokemonReq.json()) as Pokemon[];
+    const pokemon = await getAllPokemon();
 
     return {
         props: {
@@ -37,8 +21,8 @@ export function PokemonRow({ pokemon }: { pokemon: Pokemon }) {
             <div>{pokemon.hp}</div>
             <div>{pokemon.attack}</div>
             <div>{pokemon.defense}</div>
-            <div>{pokemon.special_attack}</div>
-            <div>{pokemon.special_defense}</div>
+            <div>{pokemon.specialAttack}</div>
+            <div>{pokemon.specialDefense}</div>
             <div>{pokemon.speed}</div>
         </>
     );

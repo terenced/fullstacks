@@ -19,12 +19,14 @@
     "/public/build"
   ],
   "dependencies": {
+    "@libsql/client": "^0.2.0",
     "@prisma/client": "^4.12.0",
     "@remix-run/css-bundle": "^1.16.1",
     "@remix-run/node": "^1.16.1",
     "@remix-run/react": "^1.16.1",
     "@remix-run/serve": "^1.16.1",
     "bcryptjs": "^2.4.3",
+    "drizzle-orm": "^0.26.5",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
